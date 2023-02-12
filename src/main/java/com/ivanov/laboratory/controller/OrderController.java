@@ -1,6 +1,6 @@
 package com.ivanov.laboratory.controller;
 
-import com.ivanov.laboratory.models.Order;
+import com.ivanov.laboratory.dto.OrderDTO;
 import com.ivanov.laboratory.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,7 +24,8 @@ public class OrderController {
     }
 
     @PostMapping()
-    public ResponseEntity<HttpStatus> measuring(@RequestBody Order order, BindingResult bindingResult) {
+    public ResponseEntity<HttpStatus> createOrder(@RequestBody OrderDTO order, BindingResult bindingResult) {
+
         orderService.saveOrder(order);
         return ResponseEntity.ok(HttpStatus.OK);
     }

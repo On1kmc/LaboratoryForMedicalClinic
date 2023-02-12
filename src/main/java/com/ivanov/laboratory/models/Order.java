@@ -2,9 +2,9 @@ package com.ivanov.laboratory.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.data.annotation.TypeAlias;
 
 import java.util.List;
+import java.util.Objects;
 
 
 @Entity
@@ -23,8 +23,30 @@ public class Order {
             inverseJoinColumns = @JoinColumn(name = "analyze_id"))
     private List<Analyze> analyzeList;
 
-    @Transient
-    private Client client;
+
+    @OneToMany(mappedBy = "order")
+    private List<Task> taskList;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return Objects.equals(id, order.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", analyzeList=" + analyzeList +
+                '}';
+    }
 }
 
 

@@ -1,12 +1,13 @@
 package com.ivanov.laboratory.config;
 
+import com.ivanov.laboratory.models.Task;
 import com.ivanov.laboratory.utils.Analyzators.Analyzator;
 import com.ivanov.laboratory.utils.ProcessingAnalyze;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
+import java.util.Queue;
 
 @Configuration
 public class LabConfig {
@@ -25,4 +26,10 @@ public class LabConfig {
     public Analyzator analyzator2() {
         return new Analyzator();
     }
+
+    @Bean
+    public Queue<Task> taskQueue() {
+        return new LinkedList<>();
+    }
+
 }
