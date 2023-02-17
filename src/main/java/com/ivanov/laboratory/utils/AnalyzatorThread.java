@@ -14,8 +14,7 @@ public class AnalyzatorThread implements Runnable {
     public void run() {
         try {
             System.out.println(analyzator.getTask().getAnalyze().getName() + " processing");
-            Thread.sleep(10000);
-            analyzator.getTask().setDone("done");
+            Thread.sleep(10000); // analyzing....
             analyzator.getTaskService().setTaskDone(analyzator.getTask());
             System.out.println(analyzator.getTask().getAnalyze().getName() + " Done!! " + Thread.currentThread().getName());
             analyzator.setTask(null);

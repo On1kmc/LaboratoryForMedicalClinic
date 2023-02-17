@@ -22,6 +22,9 @@ public class AnalyzeService {
     public List<Analyze> getAnalyzesById(List<Integer> ids) {
         Iterable<Integer> iterable = new ArrayList<>(ids);
         return analyzeRepo.findAllById(iterable);
+    }
 
+    public List<Analyze> findAll() {
+        return analyzeRepo.findAll();
     }
 }

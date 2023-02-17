@@ -26,14 +26,17 @@ public class ProcessingAnalyze implements ApplicationListener<ApplicationStarted
         taskQueue.addAll(taskService.findAllNotDoneTasks());
         while (true) {
             if (!taskQueue.isEmpty()) {
-                Task task = taskQueue.poll();
                 Analyzator analyzator;
                 if ((analyzator = findFreeAnalyzator()) != null) {
+                    Task task = taskQueue.poll();
                     analyzator.setTask(task);
                     taskService.setTaskProcessing(task);
                     Thread thread = new Thread(new AnalyzatorThread(analyzator));
                     thread.start();
                 }
+
+
+
             }
         }
     }

@@ -3,6 +3,7 @@ package com.ivanov.laboratory.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,6 +18,9 @@ public class Order {
     @Column(name = "id")
     private Long id;
 
+
+    private Long orderId;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "order_analyze",
             joinColumns = @JoinColumn(name = "order_id"),
@@ -26,6 +30,8 @@ public class Order {
 
     @OneToMany(mappedBy = "order")
     private List<Task> taskList;
+
+    private LocalDate dateOfOrder;
 
     @Override
     public boolean equals(Object o) {
