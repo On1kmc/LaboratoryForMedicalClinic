@@ -19,7 +19,7 @@ public class Order {
     private Long id;
 
 
-    private Long orderId;
+    private Long clinicOrderId;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "order_analyze",

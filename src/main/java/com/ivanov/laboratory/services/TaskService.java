@@ -2,6 +2,7 @@ package com.ivanov.laboratory.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ivanov.laboratory.Repo.TaskRepo;
+import com.ivanov.laboratory.dto.TaskDTOForStatus;
 import com.ivanov.laboratory.models.Analyze;
 import com.ivanov.laboratory.models.Order;
 import com.ivanov.laboratory.models.Task;
@@ -62,8 +63,18 @@ public class TaskService {
     @Transactional
     public void saveTasksList(List<Task> taskList) {
         taskRepo.saveAll(taskList);
-        System.out.println(taskQueue.size());
         taskQueue.addAll(taskList);
-        System.out.println(taskQueue.size());
+    }
+
+    public List<TaskDTOForStatus> getTaskDTOListForResponse(Order order) {
+        ArrayList<TaskDTOForStatus> statusList = new ArrayList<>();
+        List<Task> taskList = order.getTaskList();
+        taskList.forEach(task -> {
+            TaskDTOForStatus status = new TaskDTOForStatus();
+            status.setName(task.getAnalyze().getName());
+            status.setStatus(task.getDone());
+            statusList.add(status);
+        });
+        return statusList;
     }
 }
